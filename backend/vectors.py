@@ -16,12 +16,10 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_community.vectorstores import FAISS
 
-nest_asyncio.apply()
 try:
-    loop = asyncio.get_event_loop()
-except RuntimeError:
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
+    nest_asyncio.apply()
+except ValueError:
+    pass  # uvloop doesn't need patching
 
 FAISS_PATH      = "./faiss_index"
 CHUNK_SIZE      = 800
